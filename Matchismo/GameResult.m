@@ -16,21 +16,19 @@
 @implementation GameResult
 
 #define ALL_RESULTS_KEY @"GameResults_All"
-
-+ (NSArray *)allGameResults {
-    NSMutableArray *allGameResults = [[NSMutableArray alloc] init];
-    
-    for (id plist in [[[NSUserDefaults standardUserDefaults] dictionaryForKey:ALL_RESULTS_KEY] allValues]) {
-        GameResult *result = [[GameResult alloc] initFromPropertyList:plist];
-        [allGameResults addObject:result];
-    }
-    
-    return allGameResults;
-}
-
 #define START_KEY @"StartDate"
 #define END_KEY @"EndDate"
 #define SCORE_KEY @"Score"
+
+// designated initializer
+- (id)init {
+    self = [super init];
+    if (self) {
+        _start = [NSDate date];
+        _end = _start;
+    }
+    return self;
+}
 
 - (id)initFromPropertyList:(id)plist {
     self = [self init];
@@ -46,6 +44,17 @@
     return self;
 }
 
++ (NSArray *)allGameResults {
+    NSMutableArray *allGameResults = [[NSMutableArray alloc] init];
+    
+    for (id plist in [[[NSUserDefaults standardUserDefaults] dictionaryForKey:ALL_RESULTS_KEY] allValues]) {
+        GameResult *result = [[GameResult alloc] initFromPropertyList:plist];
+        [allGameResults addObject:result];
+    }
+    
+    return allGameResults;
+}
+
 - (void)synchronize {
     NSMutableDictionary *mutableGameResultsFromUserDefaults = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:ALL_RESULTS_KEY] mutableCopy];
     if (!mutableGameResultsFromUserDefaults) mutableGameResultsFromUserDefaults = [[NSMutableDictionary alloc] init];
@@ -56,16 +65,6 @@
 
 - (id)asPropertyList {
     return @{ START_KEY : self.start, END_KEY : self.end, SCORE_KEY : @(self.score) };
-}
-
-// designated initializer
-- (id)init {
-    self = [super init];
-    if (self) {
-        _start = [NSDate date];
-        _end = _start;
-    }
-    return self;
 }
 
 - (NSTimeInterval)duration {
