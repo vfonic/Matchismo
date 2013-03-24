@@ -16,14 +16,15 @@
                     </tabBar>
                     <connections>
                         <segue destination="2" kind="relationship" relationship="viewControllers" id="S8w-3q-zMx"/>
+                        <segue destination="dyl-H9-GB0" kind="relationship" relationship="viewControllers" id="mYg-kh-Omi"/>
                         <segue destination="8yw-BC-a3H" kind="relationship" relationship="viewControllers" id="bm5-KI-ISU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2cU-c4-LMv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-384" y="-221"/>
+            <point key="canvasLocation" x="-404" y="-167"/>
         </scene>
-        <!--Card Game View Controller - Item-->
+        <!--Card Game View Controller - Classical-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="CardGameViewController" sceneMemberID="viewController">
@@ -64,7 +65,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Flips: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NHC-gj-Fdy">
-                                <rect key="frame" x="20" y="344" width="69" height="21"/>
+                                <rect key="frame" x="20" y="344" width="218" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -295,7 +296,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9bh-zM-GRJ">
-                                <rect key="frame" x="97" y="344" width="76" height="21"/>
+                                <rect key="frame" x="20" y="370" width="218" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -323,22 +324,13 @@
                                     <action selector="dialButtonPressed" destination="2" eventType="touchUpInside" id="9uR-jL-iwP"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Ene-wX-ead">
-                                <rect key="frame" x="175" y="343" width="63" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="2"/>
-                                    <segment title="3"/>
-                                </segments>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="IAZ-VJ-fJ2"/>
+                    <tabBarItem key="tabBarItem" title="Classical" id="IAZ-VJ-fJ2"/>
                     <connections>
                         <outlet property="flipResultLabel" destination="a6Z-lq-H5L" id="V9T-zP-cHH"/>
                         <outlet property="flipsLabel" destination="NHC-gj-Fdy" id="QhG-Bg-o2H"/>
-                        <outlet property="gameModeSegmentedControl" destination="Ene-wX-ead" id="sLy-Wt-XYq"/>
                         <outlet property="scoreLabel" destination="9bh-zM-GRJ" id="Fwe-CR-bIC"/>
                         <outletCollection property="cardButtons" destination="EXt-eX-5mQ" id="6kL-Tf-agk"/>
                         <outletCollection property="cardButtons" destination="iL4-sU-wl3" id="qDc-fD-asT"/>
@@ -362,7 +354,7 @@
             </objects>
             <point key="canvasLocation" x="154" y="-709"/>
         </scene>
-        <!--Game Result View Controller - Item-->
+        <!--Game Result View Controller - Scoreboard-->
         <scene sceneID="3kF-pQ-PHs">
             <objects>
                 <viewController id="8yw-BC-a3H" customClass="GameResultViewController" sceneMemberID="viewController">
@@ -425,14 +417,29 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Kcn-qA-M0u"/>
+                    <tabBarItem key="tabBarItem" title="Scoreboard" id="Kcn-qA-M0u"/>
                     <connections>
                         <outlet property="display" destination="u9K-mt-w0R" id="5sp-yi-tcq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YlE-za-XTP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="154" y="-72"/>
+            <point key="canvasLocation" x="154" y="568"/>
+        </scene>
+        <!--Set Game View Controller - Set-->
+        <scene sceneID="HRW-xj-its">
+            <objects>
+                <viewController id="dyl-H9-GB0" customClass="SetGameViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lja-95-8YE">
+                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Set" id="O07-An-WaO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vU7-Ev-kgd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="154" y="-100"/>
         </scene>
     </scenes>
     <classes>
@@ -442,7 +449,6 @@
                 <relationship kind="action" name="flipCard:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="flipResultLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="flipsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="gameModeSegmentedControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
                 <relationship kind="outletCollection" name="cardButtons" candidateClass="UIButton"/>
             </relationships>
@@ -452,6 +458,9 @@
             <relationships>
                 <relationship kind="outlet" name="display" candidateClass="UITextView"/>
             </relationships>
+        </class>
+        <class className="SetGameViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetGameViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

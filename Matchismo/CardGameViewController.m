@@ -20,7 +20,6 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *flipResultLabel;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSegmentedControl;
 @property (strong, nonatomic) GameResult *gameResult;
 @end
 
@@ -32,11 +31,9 @@
 }
 
 - (CardMatchingGame *)game {
-    int mode = [self.gameModeSegmentedControl selectedSegmentIndex]+2;
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                                           usingDeck:[[PlayingCardDeck alloc]init]
-                                                           // 0 or 1 plus 2 shifts this to 2 for dual and 3 for tripple mode
-                                                           withMode:mode];
+                                                           withMode:2];
     return _game;
 }
 
@@ -47,13 +44,6 @@
 
 - (void)gameModeChanged:(UISegmentedControl *)sender {
     [self dialNewGame];
-}
-
-- (void)setGameModeSegmentedControl:(UISegmentedControl *)gameModeSegmentedControl {
-    _gameModeSegmentedControl = gameModeSegmentedControl;
-    [gameModeSegmentedControl addTarget:self
-                                 action:@selector(gameModeChanged:)
-                       forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)updateUI {
@@ -76,7 +66,6 @@
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     self.flipResultLabel.text = self.game.flipResult;
-    self.gameModeSegmentedControl.enabled = false;
 }
 
 -(void)setFlipCount:(int)flipCount {
@@ -90,7 +79,6 @@
     [self updateUI];
     self.flipResultLabel.text = @"";
     self.flipCount = 0;
-    self.gameModeSegmentedControl.enabled = YES;
 }
 - (IBAction)dialButtonPressed {
     [self dialNewGame];

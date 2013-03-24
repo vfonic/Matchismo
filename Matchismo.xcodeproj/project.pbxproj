@@ -26,6 +26,7 @@
 		422D2DA316BCA1E000B410E3 /* Card_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 422D2DA216BCA1E000B410E3 /* Card_back.png */; };
 		424BF16A16C3080A0095DEE1 /* GameResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 424BF16916C3080A0095DEE1 /* GameResultViewController.m */; };
 		424BF16D16C308FA0095DEE1 /* GameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 424BF16C16C308FA0095DEE1 /* GameResult.m */; };
+		425853EF16FFBB0200C38AD7 /* SetGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 425853EE16FFBB0200C38AD7 /* SetGameViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,8 @@
 		424BF16916C3080A0095DEE1 /* GameResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameResultViewController.m; sourceTree = "<group>"; };
 		424BF16B16C308FA0095DEE1 /* GameResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameResult.h; sourceTree = "<group>"; };
 		424BF16C16C308FA0095DEE1 /* GameResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameResult.m; sourceTree = "<group>"; };
+		425853ED16FFBB0200C38AD7 /* SetGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetGameViewController.h; sourceTree = "<group>"; };
+		425853EE16FFBB0200C38AD7 /* SetGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetGameViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				422D2D8716BC31B000B410E3 /* MainStoryboard.storyboard */,
+				425853ED16FFBB0200C38AD7 /* SetGameViewController.h */,
+				425853EE16FFBB0200C38AD7 /* SetGameViewController.m */,
 				424BF16B16C308FA0095DEE1 /* GameResult.h */,
 				424BF16C16C308FA0095DEE1 /* GameResult.m */,
 				424BF16816C3080A0095DEE1 /* GameResultViewController.h */,
@@ -239,6 +244,7 @@
 				422D2DA116BC56B200B410E3 /* CardMatchingGame.m in Sources */,
 				424BF16A16C3080A0095DEE1 /* GameResultViewController.m in Sources */,
 				424BF16D16C308FA0095DEE1 /* GameResult.m in Sources */,
+				425853EF16FFBB0200C38AD7 /* SetGameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
