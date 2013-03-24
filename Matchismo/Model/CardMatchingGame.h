@@ -15,6 +15,13 @@
 // designated initializer
 - (id)initWithCardCount:(NSUInteger)count
               usingDeck:(Deck *)deck
+               withMode:(int)mode
+             matchBonus:(int)bonus
+        mismatchPenalty:(int)penalty
+               flipCost:(int)cost;
+
+- (id)initWithCardCount:(NSUInteger)count
+              usingDeck:(Deck *)deck
                withMode:(int)mode;
 
 - (void)flipCardAtIndex:(NSUInteger)index;

@@ -42,10 +42,6 @@
     [self updateUI];
 }
 
-- (void)gameModeChanged:(UISegmentedControl *)sender {
-    [self dialNewGame];
-}
-
 - (void)updateUI {
     UIImage *cardBackImage = [UIImage imageNamed:@"Card_back.png"];
     
@@ -73,6 +69,7 @@
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
     NSLog(@"flips updated to %d", self.flipCount);
 }
+
 - (void)dialNewGame {
     self.game = nil;
     self.gameResult = nil;
@@ -80,13 +77,16 @@
     self.flipResultLabel.text = @"";
     self.flipCount = 0;
 }
+
 - (IBAction)dialButtonPressed {
     [self dialNewGame];
 }
+
 - (IBAction)flipCard:(UIButton *)sender {
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     ++self.flipCount;
     [self updateUI];
     self.gameResult.score = self.game.score;
 }
+
 @end
