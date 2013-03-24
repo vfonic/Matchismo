@@ -388,6 +388,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="sortByDateClicked" destination="8yw-BC-a3H" eventType="touchUpInside" id="vIf-N7-LqT"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="y0a-Wl-VLJ">
                                 <rect key="frame" x="106" y="348" width="85" height="44"/>
@@ -400,6 +403,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="sortByScoreClicked" destination="8yw-BC-a3H" eventType="touchUpInside" id="Tgb-sv-0Xo"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="woG-tc-bQB">
                                 <rect key="frame" x="199" y="348" width="101" height="44"/>
@@ -412,6 +418,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="sortByDurationClicked" destination="8yw-BC-a3H" eventType="touchUpInside" id="5hr-Os-mEl"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
