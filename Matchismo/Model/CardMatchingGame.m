@@ -75,8 +75,8 @@
                     for (Card *otherCard in otherCards) {
                         otherCard.unplayable = YES;
                     }
-                    self.score += matchScore * self.matchBonus * self.gameMode;
-                    self.flipResult = [NSString stringWithFormat:@"Matched %@&%@\nfor %d points", card.description, [otherCards componentsJoinedByString:@"&"], matchScore * self.matchBonus * self.gameMode];
+                    self.score += matchScore * self.matchBonus;
+                    self.flipResult = [NSString stringWithFormat:@"Matched %@&%@\nfor %d points", card.description, [otherCards componentsJoinedByString:@"&"], matchScore * self.matchBonus];
                 } else {
                     for (Card *otherCard in otherCards) {
                         otherCard.faceUp = NO;

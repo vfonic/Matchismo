@@ -36,12 +36,33 @@
     NSLog(@"SetGameViewController updateUI");
     for (UIButton *cardButton in self.cardButtons) {
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
-//        [cardButton setAttributedTitle:[card attributedDescription] forState:UIControlStateNormal];
-//        [cardButton setTitle:[card description] forState:UIControlStateNormal|UIControlState];
-        [cardButton setTitle:@"" forState:UIControlStateDisabled];
-        cardButton.selected = card.isFaceUp;
-        cardButton.enabled = !card.isUnplayable;
-        cardButton.alpha = (card.isFaceUp ? 0.5 : 1);
+        if ([card isKindOfClass:[SetCard class]]) {
+            SetCard *setCard = (SetCard *)card;
+            CGFloat alpha;
+            switch ([setCard shading]) {
+                case OpenShading:
+                    alpha = 0;
+                    break;
+                case StripedShading:
+                    alpha = 0.2;
+                    break;
+                default:
+                    alpha = 1.;
+                    break;
+            }
+            NSMutableAttributedString *cardAttributedString = [[NSMutableAttributedString alloc] initWithString:[card description]];
+            [cardAttributedString addAttributes:@{
+                           NSFontAttributeName : [[cardButton.titleLabel font] fontWithSize:18],
+                NSForegroundColorAttributeName : [[setCard color] colorWithAlphaComponent:alpha],
+                    NSStrokeColorAttributeName : [setCard color],
+                    NSStrokeWidthAttributeName : @-5}
+                                          range:NSMakeRange(0, [[setCard description] length])];
+            [cardButton setAttributedTitle:cardAttributedString forState:UIControlStateNormal];
+            [cardButton setAttributedTitle:[[NSMutableAttributedString alloc] initWithString:@""] forState:UIControlStateSelected|UIControlStateDisabled];
+            cardButton.selected = setCard.isFaceUp;
+            cardButton.enabled = !setCard.isUnplayable;
+            cardButton.alpha = (setCard.isFaceUp ? 0.5 : 1);
+        }
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     self.flipResultLabel.text = self.game.flipResult;
