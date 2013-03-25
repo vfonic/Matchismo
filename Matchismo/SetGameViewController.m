@@ -7,32 +7,43 @@
 //
 
 #import "SetGameViewController.h"
+#import "SetCard.h"
+#import "SetCardDeck.h"
+#import "CardMatchingGame.h"
 
 @interface SetGameViewController ()
-
+@property (strong, nonatomic) CardMatchingGame *game;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (weak, nonatomic) IBOutlet UILabel *flipResultLabel;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @end
 
 @implementation SetGameViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+- (CardMatchingGame *)game {
+    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                                          usingDeck:[[SetCardDeck alloc]init]
+                                                           withMode:3];
+    return _game;
+}
+
+- (void)setCardButtons:(NSArray *)cardButtons {
+    _cardButtons = cardButtons;
+    [self updateUI];
+}
+
+- (void)updateUI {
+    NSLog(@"SetGameViewController updateUI");
+    for (UIButton *cardButton in self.cardButtons) {
+        Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
+//        [cardButton setAttributedTitle:[card attributedDescription] forState:UIControlStateNormal];
+//        [cardButton setTitle:[card description] forState:UIControlStateNormal|UIControlState];
+        [cardButton setTitle:@"" forState:UIControlStateDisabled];
+        cardButton.selected = card.isFaceUp;
+        cardButton.enabled = !card.isUnplayable;
+        cardButton.alpha = (card.isFaceUp ? 0.5 : 1);
     }
-    return self;
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+    self.flipResultLabel.text = self.game.flipResult;
 }
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end
