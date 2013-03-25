@@ -16,6 +16,21 @@
         id firstCard = otherCards[0];
         id secondCard = otherCards[1];
         if ([firstCard isKindOfClass:[SetCard class]] && [secondCard isKindOfClass:[SetCard class]]) {
+            SetCard *firstSetCard = firstCard;
+            SetCard *secondSetCard = secondCard;
+            if (((self.number == firstSetCard.number && self.number == secondSetCard.number)
+                || (self.number != firstSetCard.number && self.number != secondSetCard.number && firstSetCard.number != secondSetCard.number))
+                &&
+                (([self.symbol isEqual:firstSetCard.symbol] && [self.symbol isEqual:secondSetCard.symbol])
+                 ||(![self.symbol isEqual:firstSetCard.symbol] && ![self.symbol isEqual:secondSetCard.symbol] && ![firstSetCard.symbol isEqual:secondSetCard.symbol]))
+                &&
+                ((self.shading == firstSetCard.shading && self.shading == secondSetCard.shading)
+                 ||(self.shading != firstSetCard.shading && self.shading != secondSetCard.shading && firstSetCard.shading != secondSetCard.shading))
+                &&
+                (([self.color isEqual:firstSetCard.color] && [self.color isEqual:secondSetCard.color])
+                 ||(![self.color isEqual:firstSetCard.color] && ![self.color isEqual:secondSetCard.color] && ![firstSetCard.color isEqual:secondSetCard.color]))) {
+                    score = 10;
+                }
         }
     }
     return score;
