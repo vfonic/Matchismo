@@ -76,17 +76,17 @@
                         otherCard.unplayable = YES;
                     }
                     self.score += matchScore * self.matchBonus;
-                    self.flipResult = [NSString stringWithFormat:@"Matched %@&%@\nfor %d points", card.description, [otherCards componentsJoinedByString:@"&"], matchScore * self.matchBonus];
+                    self.flipResult = [NSString stringWithFormat:@"Matched %@&%@\nfor %d points", [card description], [otherCards componentsJoinedByString:@"&"], matchScore * self.matchBonus];
                 } else {
                     for (Card *otherCard in otherCards) {
                         otherCard.faceUp = NO;
                     }
                     self.score -= self.mismatchPenalty;
-                    self.flipResult = [NSString stringWithFormat:@"%@&%@ don't match!\n%d point penalty!", card.description, [otherCards componentsJoinedByString:@"&"], self.mismatchPenalty];
+                    self.flipResult = [NSString stringWithFormat:@"%@&%@ don't match!\n%d point penalty!", [card description], [otherCards componentsJoinedByString:@"&"], self.mismatchPenalty];
                 }
             }
             else { // score didn't change, no match, no mismatch
-                self.flipResult = [NSString stringWithFormat:@"Flipped up %@", card.description];
+                self.flipResult = [NSString stringWithFormat:@"Flipped up %@", [card description]];
                 NSLog(@"Flipped up a card");
             }
             self.score -= self.flipCost;

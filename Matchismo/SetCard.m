@@ -21,8 +21,8 @@
             if (((self.number == firstSetCard.number && self.number == secondSetCard.number)
                 || (self.number != firstSetCard.number && self.number != secondSetCard.number && firstSetCard.number != secondSetCard.number))
                 &&
-                (([self.symbol isEqual:firstSetCard.symbol] && [self.symbol isEqual:secondSetCard.symbol])
-                 ||(![self.symbol isEqual:firstSetCard.symbol] && ![self.symbol isEqual:secondSetCard.symbol] && ![firstSetCard.symbol isEqual:secondSetCard.symbol]))
+                (([self.symbol isEqualToString:firstSetCard.symbol] && [self.symbol isEqualToString:secondSetCard.symbol])
+                 ||(![self.symbol isEqualToString:firstSetCard.symbol] && ![self.symbol isEqualToString:secondSetCard.symbol] && ![firstSetCard.symbol isEqualToString:secondSetCard.symbol]))
                 &&
                 ((self.shading == firstSetCard.shading && self.shading == secondSetCard.shading)
                  ||(self.shading != firstSetCard.shading && self.shading != secondSetCard.shading && firstSetCard.shading != secondSetCard.shading))
@@ -44,18 +44,14 @@
 
 +(NSArray *)validColors {
     static NSArray *validColors = nil;
-    if (!validColors) validColors = @[[UIColor redColor], [UIColor greenColor], [UIColor purpleColor]];
+    if (!validColors) validColors = @[[UIColor redColor], [UIColor greenColor], [UIColor blueColor]];
     return validColors;
 }
 
 +(NSUInteger)maxNumber { return 3; }
 
 - (NSString *)description {
-    NSMutableString *description = [NSMutableString stringWithCapacity:[SetCard maxNumber]];
-    for (int i = 0; i < self.number; ++i) {
-        [description appendString:self.symbol];
-    }
-    return description;
+    return [self.symbol stringByPaddingToLength:self.number withString:self.symbol startingAtIndex:0];
 }
 
 @end
