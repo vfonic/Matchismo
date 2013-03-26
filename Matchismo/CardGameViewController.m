@@ -23,11 +23,6 @@
 
 @implementation CardGameViewController
 
-- (GameResult *)gameResult {
-    if (!_gameResult) _gameResult = [[GameResult alloc] init];
-    return _gameResult;
-}
-
 - (void)updateUI {
     NSLog(@"CardGameViewController updateUI");
 }

@@ -19,6 +19,7 @@
 #define START_KEY @"StartDate"
 #define END_KEY @"EndDate"
 #define SCORE_KEY @"Score"
+#define GAME_TYPE_KEY @"Game_Type"
 
 // designated initializer
 - (id)init {
@@ -35,10 +36,11 @@
     if (self) {
         if ([plist isKindOfClass:[NSDictionary class]]) {
             NSDictionary *resultDictionary = (NSDictionary *)plist;
+            _gameTypeName = resultDictionary[GAME_TYPE_KEY];
             _start = resultDictionary[START_KEY];
             _end = resultDictionary[END_KEY];
             _score = [resultDictionary[SCORE_KEY] intValue];
-            if (!_start || !_end) self = nil;
+            if (!_start || !_end || !_gameTypeName) self = nil;
         }
     }
     return self;
@@ -49,7 +51,7 @@
     
     for (id plist in [[[NSUserDefaults standardUserDefaults] dictionaryForKey:ALL_RESULTS_KEY] allValues]) {
         GameResult *result = [[GameResult alloc] initFromPropertyList:plist];
-        [allGameResults addObject:result];
+        if (result) [allGameResults addObject:result];
     }
     
     return allGameResults;
@@ -63,8 +65,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+-(void)setGameTypeName:(NSString *)gameTypeName {
+    _gameTypeName = gameTypeName;
+    NSLog(@"GameTypeName: %@", _gameTypeName);
+}
+
 - (id)asPropertyList {
-    return @{ START_KEY : self.start, END_KEY : self.end, SCORE_KEY : @(self.score) };
+    return @{ GAME_TYPE_KEY : self.gameTypeName, START_KEY : self.start, END_KEY : self.end, SCORE_KEY : @(self.score) };
 }
 
 - (NSTimeInterval)duration {

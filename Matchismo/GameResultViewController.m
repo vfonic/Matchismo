@@ -65,7 +65,7 @@
     NSArray *sortedAllGameResults = [[GameResult allGameResults] sortedArrayUsingDescriptors:@[sortDescriptor]];
 
     for (GameResult *result in sortedAllGameResults) {
-        displayText = [displayText stringByAppendingFormat:@"Score %d (%@, %0g)\n", result.score, [dateFormatter stringFromDate:result.end], round(result.duration)];
+        displayText = [displayText stringByAppendingFormat:@"%@: %d (%@, %0gs)\n", result.gameTypeName, result.score, [dateFormatter stringFromDate:result.end], round(result.duration)];
     }
     self.display.text = displayText;
 }

@@ -867,7 +867,7 @@
             </objects>
             <point key="canvasLocation" x="154" y="-100"/>
         </scene>
-        <!--Game Result View Controller - Item-->
+        <!--Game Result View Controller - Scoreboard-->
         <scene sceneID="MVW-87-LeD">
             <objects>
                 <viewController id="bsO-sO-tP4" customClass="GameResultViewController" sceneMemberID="viewController">
@@ -930,7 +930,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="eLY-fF-FMv"/>
+                    <tabBarItem key="tabBarItem" title="Scoreboard" id="eLY-fF-FMv"/>
                     <connections>
                         <outlet property="display" destination="qF7-DO-44N" id="ud4-LS-bJL"/>
                     </connections>

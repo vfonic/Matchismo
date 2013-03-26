@@ -10,6 +10,7 @@
 #import "SetCard.h"
 #import "SetCardDeck.h"
 #import "CardMatchingGame.h"
+#import "GameResult.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SetGameViewController ()
@@ -17,9 +18,15 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *flipResultLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (strong, nonatomic) GameResult *gameResult;
 @end
 
 @implementation SetGameViewController
+
+- (GameResult *)gameResult {
+    if (!_gameResult) { _gameResult = [[GameResult alloc] init]; _gameResult.gameTypeName = @"Set"; }
+    return _gameResult;
+}
 
 - (CardMatchingGame *)game {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]

@@ -9,6 +9,7 @@
 #import "ClassicalCardGameViewController.h"
 #import "CardMatchingGame.h"
 #import "PlayingCardDeck.h"
+#import "GameResult.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ClassicalCardGameViewController ()
@@ -16,9 +17,15 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *flipResultLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (strong, nonatomic) GameResult *gameResult;
 @end
 
 @implementation ClassicalCardGameViewController
+
+- (GameResult *)gameResult {
+    if (!_gameResult) { _gameResult = [[GameResult alloc] init]; _gameResult.gameTypeName = @"Classical"; }
+    return _gameResult;
+}
 
 - (CardMatchingGame *)game {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
