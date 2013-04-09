@@ -25,4 +25,5 @@ typedef enum {
 +(NSArray *)validColors;
 +(NSUInteger)maxNumber;
 
+-(NSAttributedString *)attributedDescription;
 @end

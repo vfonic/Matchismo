@@ -11,7 +11,7 @@
 @interface CardMatchingGame()
 @property (readwrite, nonatomic) int score;
 @property (strong, nonatomic) NSMutableArray *cards; // of Card
-@property (strong, readwrite, nonatomic) NSString *flipResult;
+@property (strong, readwrite, nonatomic) id flipResult;
 @property (nonatomic) int gameMode;
 @property (nonatomic) int matchBonus;
 @property (nonatomic) int mismatchPenalty;
@@ -76,22 +76,53 @@
                         otherCard.unplayable = YES;
                     }
                     self.score += matchScore * self.matchBonus;
-                    self.flipResult = [NSString stringWithFormat:@"Matched %@&%@\nfor %d points", [card description], [otherCards componentsJoinedByString:@"&"], matchScore * self.matchBonus];
+                    NSString *flipResultString = [NSString stringWithFormat:@"Matched %@&%@ for %d points", card, [otherCards componentsJoinedByString:@"&"], matchScore * self.matchBonus];
+                    NSMutableArray *cardsArray = [otherCards mutableCopy];
+                    [cardsArray insertObject:card atIndex:0];
+                    self.flipResult = [self composeFlipResultStringFromArray:cardsArray
+                                                             andResultString:flipResultString
+                                                                     inRange:NSMakeRange([@"Matched " length], 1)];
                 } else {
                     for (Card *otherCard in otherCards) {
                         otherCard.faceUp = NO;
                     }
                     self.score -= self.mismatchPenalty;
-                    self.flipResult = [NSString stringWithFormat:@"%@&%@ don't match!\n%d point penalty!", [card description], [otherCards componentsJoinedByString:@"&"], self.mismatchPenalty];
+                    NSString *flipResultString = [NSString stringWithFormat:@"%@&%@ don't match! %d point penalty!", card, [otherCards componentsJoinedByString:@"&"], self.mismatchPenalty];
+                    NSMutableArray *cardsArray = [otherCards mutableCopy];
+                    [cardsArray insertObject:card atIndex:0];
+                    self.flipResult = [self composeFlipResultStringFromArray:cardsArray
+                                                             andResultString:flipResultString
+                                                                     inRange:NSMakeRange(0, 1)];
                 }
             }
             else { // score didn't change, no match, no mismatch
-                self.flipResult = [NSString stringWithFormat:@"Flipped up %@", [card description]];
+                NSString *flipResultString = [NSString stringWithFormat:@"Flipped up %@", card];
+                self.flipResult = [self composeFlipResultStringFromArray:@[card]
+                                                         andResultString:flipResultString
+                                                                 inRange:NSMakeRange([@"Flipped up " length], [[card description] length])];
                 NSLog(@"Flipped up a card");
             }
             self.score -= self.flipCost;
         }
         card.faceUp = !card.isFaceUp;
+    }
+}
+
+-(id)composeFlipResultStringFromArray:(NSArray *)cardArray
+                         andResultString:(NSString *)flipResultString
+                              inRange:(NSRange)range {
+    if ([[cardArray lastObject] respondsToSelector:@selector(attributedDescription)]) {
+        NSMutableAttributedString *flipResultAttributedString = [[NSMutableAttributedString alloc] initWithString:flipResultString];
+        for (id card in cardArray) {
+            range.length = [[card description] length];
+            NSAttributedString *attributedDescription = [card performSelector:@selector(attributedDescription)];
+            NSDictionary *attributes = [attributedDescription attributesAtIndex:0 effectiveRange:NULL];
+            [flipResultAttributedString addAttributes:attributes range:range];
+            range.location += range.length + 1;
+        }
+        return flipResultAttributedString;
+    } else {
+        return flipResultString;
     }
 }
 

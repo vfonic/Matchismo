@@ -29,6 +29,6 @@
 - (Card *)cardAtIndex:(NSUInteger)index;
 
 @property (readonly, nonatomic) int score;
-@property (readonly, nonatomic) NSString *flipResult;
+@property (strong, readonly, nonatomic) id flipResult;
 
 @end

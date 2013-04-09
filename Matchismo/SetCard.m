@@ -54,4 +54,25 @@
     return [self.symbol stringByPaddingToLength:self.number withString:self.symbol startingAtIndex:0];
 }
 
+-(NSAttributedString *)attributedDescription {
+    NSMutableAttributedString *attributedDescription = [[NSMutableAttributedString alloc] initWithString:[self description]];
+    
+    CGFloat alpha;
+    switch ([self shading]) {
+        case OpenShading:
+            alpha = 0;
+            break;
+        case StripedShading:
+            alpha = 0.2;
+            break;
+        default:
+            alpha = 1.;
+            break;
+    }
+    [attributedDescription addAttributes:@{
+         NSForegroundColorAttributeName : [[self color] colorWithAlphaComponent:alpha],
+             NSStrokeColorAttributeName : [self color],
+             NSStrokeWidthAttributeName : @-5} range:NSMakeRange(0, self.number)];
+    return attributedDescription;
+}
 @end
