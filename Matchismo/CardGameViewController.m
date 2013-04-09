@@ -22,10 +22,16 @@
 @property (weak, nonatomic) IBOutlet UILabel *flipResultLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSegmentedControl;
 @property (strong, nonatomic) GameResult *gameResult;
+@property (weak, nonatomic) IBOutlet UISlider *historySlider;
+@property (strong, nonatomic) NSMutableArray *history; // of NSString
 @end
 
 @implementation CardGameViewController
 
+- (NSMutableArray *)history {
+    if (!_history) _history = [[NSMutableArray alloc] init];
+    return _history;
+}
 - (GameResult *)gameResult {
     if (!_gameResult) _gameResult = [[GameResult alloc] init];
     return _gameResult;
@@ -76,7 +82,11 @@
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     self.flipResultLabel.text = self.game.flipResult;
+    
     self.gameModeSegmentedControl.enabled = false;
+    if (self.game.flipResult)
+        [self.history addObject:self.game.flipResult];
+    self.historySlider.value = self.historySlider.maximumValue = self.history.count;
 }
 
 -(void)setFlipCount:(int)flipCount {
@@ -84,21 +94,29 @@
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
     NSLog(@"flips updated to %d", self.flipCount);
 }
-- (void)dialNewGame {
+- (IBAction)dialNewGame {
     self.game = nil;
     self.gameResult = nil;
     [self updateUI];
     self.flipResultLabel.text = @"";
     self.flipCount = 0;
     self.gameModeSegmentedControl.enabled = YES;
-}
-- (IBAction)dialButtonPressed {
-    [self dialNewGame];
+    [self.history removeAllObjects];
+    self.historySlider.value = self.historySlider.maximumValue = self.history.count;
 }
 - (IBAction)flipCard:(UIButton *)sender {
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     ++self.flipCount;
     [self updateUI];
     self.gameResult.score = self.game.score;
+}
+- (IBAction)showHistory {
+    int sliderValue = round(self.historySlider.value);
+    NSLog(@"New slider value: %d", sliderValue);
+    [self.historySlider setValue:sliderValue animated:NO];
+    if (sliderValue == 0 || self.history.count == 0)
+        self.flipResultLabel.text = @"";
+    else
+        self.flipResultLabel.text = self.history[sliderValue-1];
 }
 @end
