@@ -99,6 +99,7 @@
     self.gameResult = nil;
     [self updateUI];
     self.flipResultLabel.text = @"";
+    self.flipResultLabel.alpha = 1.;
     self.flipCount = 0;
     self.gameModeSegmentedControl.enabled = YES;
     [self.history removeAllObjects];
@@ -118,5 +119,7 @@
         self.flipResultLabel.text = @"";
     else
         self.flipResultLabel.text = self.history[sliderValue-1];
+    if (self.history.count == sliderValue) self.flipResultLabel.alpha = 1.;
+    else self.flipResultLabel.alpha = 0.5;
 }
 @end
