@@ -35,20 +35,26 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PlayingCard" forIndexPath:indexPath];
     Card *card = [self.game cardAtIndex:indexPath.item];
-    [self updateCell:cell usingCard:card];
+    [self updateCell:cell usingCard:card animate:NO];
     return cell;
 }
 
-- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card {
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card animate:(BOOL)animate {
     if ([cell isKindOfClass:[PlayingCardCollectionViewCell class]]) {
         PlayingCardView *playingCardView = ((PlayingCardCollectionViewCell *)cell).playingCardView;
         if ([card isKindOfClass:[PlayingCard class]]) {
             PlayingCard *playingCard = (PlayingCard *)card;
             playingCardView.rank = playingCard.rank;
             playingCardView.suit = playingCard.suit;
-            
-            playingCardView.faceUp = playingCard.isFaceUp;
-            
+            if (animate) {
+                NSUInteger flipDirection = playingCard.isFaceUp ? UIViewAnimationOptionTransitionFlipFromRight : UIViewAnimationOptionTransitionFlipFromLeft;
+                [UIView transitionWithView:playingCardView duration:0.5 options:flipDirection animations:^{
+                    playingCardView.faceUp = playingCard.isFaceUp;
+                }
+                                completion:NULL];
+            } else {
+                playingCardView.faceUp = playingCard.isFaceUp;
+            }
             playingCardView.alpha = playingCard.isUnplayable ? 0.3 : 1.0;
         }
     }
@@ -79,7 +85,7 @@
     for (UICollectionViewCell *cell in [self.cardCollectionView visibleCells]) {
         NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cell];
         Card *card = [self.game cardAtIndex:indexPath.item];
-        [self updateCell:cell usingCard:card];
+        [self updateCell:cell usingCard:card animate:NO];
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
 }
@@ -90,6 +96,7 @@
     if (indexPath) {
         [self.game flipCardAtIndex:indexPath.item];
         ++self.flipCount;
+        [self updateCell:[self.cardCollectionView cellForItemAtIndexPath:indexPath] usingCard:[self.game cardAtIndex:indexPath.item] animate:YES];
         [self updateUI];
         self.gameResult.score = self.game.score;
     }
